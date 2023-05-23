@@ -13,8 +13,6 @@ def generer_tableau_coor(N_point,xx,corde, type_distribution):
     elif type_distribution == 'non-uniforme':
         tetha = np.linspace(0 , np.pi , N_point)
         xc = (1/2)*(1-np.cos(tetha))
-    else:
-        xc = 0
     yt = 5 * epaisseur_pourcent * (0.2969 * np.sqrt(xc) - 0.1260 * xc - 0.3516 * xc ** 2 + 0.2843 * xc ** 3 - 0.1036 * xc ** 4)
     x_up = xc * corde
     y_up = yt * corde
