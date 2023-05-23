@@ -13,6 +13,8 @@ def generer_tableau_coor(N_point,xx,corde, type_distribution):
     elif type_distribution == 'non-uniforme':
         tetha = np.linspace(0 , np.pi , N_point)
         xc = (1/2)*(1-np.cos(tetha))
+    else:
+        xc = 0
     yt = 5 * epaisseur_pourcent * (0.2969 * np.sqrt(xc) - 0.1260 * xc - 0.3516 * xc ** 2 + 0.2843 * xc ** 3 - 0.1036 * xc ** 4)
     x_up = xc * corde
     y_up = yt * corde
@@ -31,13 +33,11 @@ def epaisseur_max (y_up):
     global  epaisseur_max
     epaisseur_max = np.max(y_up)
     return
-
-
 def graphique(x_up,y_up,x_down,y_down):
     plt.plot(x_up, y_up, label='Extrados')
     plt.plot(x_down, y_down, label='Intrados')
-    plt.xlabel('C [m]')
-    plt.ylabel('y [m]')
+    plt.xlabel('Corde [m]')
+    plt.ylabel('Épaisseur [m]')
     plt.title(f'Profil NACA 00{xx}')
     plt.grid(True)
     plt.legend()
@@ -84,11 +84,11 @@ generer_tableau_coor(N_point, xx,corde,type_distribution)
 pos_epaisseur_max(x_up,y_up)
 epaisseur_max(y_up)
 
-print(f'x_up = {x_up}\n\n')
-print(f'y_up = {y_up}\n\n')
-print(f'x_down = {x_down}\n\n')
-print(f'y_down = {y_down}\n\n')
-print(f'epaisseur max : {epaisseur_max}\n')
-print(f'position epaisseur max {pos_epaisseur_max}')
+tab_1 = np.vstack((x_up , y_up))
+tab_2 = np.vstack((x_down , y_down))
+print(f'(x_up , y_up) = \n{np.transpose(tab_1)}\n\n')
+print(f'(x_down , y_down) = \n{np.transpose(tab_2)}\n\n')
+print(f'epaisseur max : {epaisseur_max} (m)')
+print(f'position epaisseur max {pos_epaisseur_max} (m)')
 
 graphique(x_up , y_up , x_down , y_down)
