@@ -7,13 +7,13 @@ def generer_tableau_coor(N_point,xx,corde, type_distribution):
     global y_up
     global x_down
     global y_down
-    tepaisseur_pourcent = xx/100
+    epaisseur_pourcent = xx/100
     if type_distribution == 'lineaire':
         xc = np.linspace(0 , 1 , N_point)
     elif type_distribution == 'non-uniforme':
         tetha = np.linspace(0 , np.pi , N_point)
         xc = (1/2)*(1-np.cos(tetha))
-    yt = 5 * tepaisseur_pourcent * (0.2969 * np.sqrt(xc) - 0.1260 * xc - 0.3516 * xc ** 2 + 0.2843 * xc ** 3 - 0.1036 * xc ** 4)
+    yt = 5 * epaisseur_pourcent * (0.2969 * np.sqrt(xc) - 0.1260 * xc - 0.3516 * xc ** 2 + 0.2843 * xc ** 3 - 0.1036 * xc ** 4)
     x_up = xc * corde
     y_up = yt * corde
     x_down = xc * corde
@@ -44,17 +44,41 @@ def graphique(x_up,y_up,x_down,y_down):
     plt.axis('equal')
     plt.show()
     return
-xx = ''
-N_point = ''
-corde = ''
-type_distribution = ''
-if not isinstance(xx , int):
-    xx = int(input('NACA 00XX\n'))
+
+while True:
+    xx = input('Veuillez entrer les deux derniers chiffres du profil NACA 00XX\n')
+    if xx.isdigit():
+        xx = int(xx)
+        break
+    else:
+        print('veuillez entrer un entier')
+    continue
+while True:
+    N_point = input('Entrez le nombre de points que vous voulez pour tracer la courbe \n')
+    if N_point.isdigit():
+        N_point = int(N_point)
+        break
+    else:
+        print('veuillez entrer un entier')
     continue
 
-N_point = int(input('Nombre de points\n'))
-corde = int(input('corde\n'))
-type_distribution = input('type \n')
+while True:
+    corde = input('Veuillez entrer la longeur de corde du profil en mètres \n')
+    if corde.isdigit():
+        corde = int(corde)
+        break
+    else:
+        print('veuillez entrer un entier')
+    continue
+
+while True:
+    type_distribution = input('veuillez entrer le type de distribution que vous voulez \'lineaire\' ou \'non-uniforme\' \n')
+    if type_distribution == 'lineaire' or type_distribution == 'non-uniforme':
+        break
+    else:
+        print('veuillez entrer (lineaire) ou (non-uniforme)')
+    continue
+
 
 generer_tableau_coor(N_point, xx,corde,type_distribution)
 pos_epaisseur_max(x_up,y_up)
