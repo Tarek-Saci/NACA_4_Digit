@@ -86,8 +86,8 @@ epaisseur_max(y_up)
 
 tab_1 = np.vstack((x_up , y_up))
 tab_2 = np.vstack((x_down , y_down))
-print(f'(x_up , y_up) = \n{np.transpose(tab_1)}\n\n')
-print(f'(x_down , y_down) = \n{np.transpose(tab_2)}\n\n')
+print(f' [      x_up            y_up     ]  \n{np.transpose(tab_1)}\n\n')
+print(f' [     x_down          y_down    ] \n{np.transpose(tab_2)}\n\n')
 print(f'epaisseur max : {epaisseur_max} (m)')
 print(f'position epaisseur max {pos_epaisseur_max} (m)')
 
