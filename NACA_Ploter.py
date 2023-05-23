@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
 def generer_tableau_coor(N_point,xx,corde, type_distribution):
@@ -21,13 +21,17 @@ def generer_tableau_coor(N_point,xx,corde, type_distribution):
     return
 
 def pos_epaisseur_max(x_up,y_up):
-    i = y_up.index(np.max(y_up)) #position du max de y_up dans le tableau
+    global pos_epaisseur_max
+    max = (np.max(y_up))
+    list1 = y_up.tolist()
+    i = list1.index(max) #position du max de y_up dans le tableau
     pos_epaisseur_max = x_up[i]
-    return pos_epaisseur_max
+    return
+def epaisseur_max (y_up):
+    global  epaisseur_max
+    epaisseur_max = np.max(y_up)
+    return
 
-epaisseur_max = lambda y_up : np.max(y_up)
-
-epaisseur_max = np.max(y_up)
 
 def graphique():
     return
@@ -38,9 +42,22 @@ corde = int(input('corde\n'))
 type_distribution = input('type \n')
 
 generer_tableau_coor(N_point, xx,corde,type_distribution)
+pos_epaisseur_max(x_up,y_up)
+epaisseur_max(y_up)
 
+print(f'x_up = {x_up}\n\n')
+print(f'y_up = {y_up}\n\n')
+print(f'x_down = {x_down}\n\n')
+print(f'y_down = {y_down}\n\n')
+print(f'epaisseur max : {epaisseur_max}\n')
+print(f'position epaisseur max {pos_epaisseur_max}')
 
-print(f'x_up = {x_up}')
-print(f'y_up = {y_up}')
-print(f'x_down = {x_down}')
-print(f'y_down = {y_down}')
+plt.plot(x_up , y_up , label='Extrados')
+plt.plot(x_down , y_down , label='Intrados')
+plt.xlabel('C [m]')
+plt.ylabel('y [m]')
+plt.title(f'Profil NACA 00{xx}')
+plt.grid(True)
+plt.legend()
+plt.axis('equal')
+plt.show()
