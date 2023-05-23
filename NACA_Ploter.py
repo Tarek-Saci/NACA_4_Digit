@@ -33,10 +33,25 @@ def epaisseur_max (y_up):
     return
 
 
-def graphique():
+def graphique(x_up,y_up,x_down,y_down):
+    plt.plot(x_up, y_up, label='Extrados')
+    plt.plot(x_down, y_down, label='Intrados')
+    plt.xlabel('C [m]')
+    plt.ylabel('y [m]')
+    plt.title(f'Profil NACA 00{xx}')
+    plt.grid(True)
+    plt.legend()
+    plt.axis('equal')
+    plt.show()
     return
+xx = ''
+N_point = ''
+corde = ''
+type_distribution = ''
+if not isinstance(xx , int):
+    xx = int(input('NACA 00XX\n'))
+    continue
 
-xx = int(input('NACA 00XX\n'))
 N_point = int(input('Nombre de points\n'))
 corde = int(input('corde\n'))
 type_distribution = input('type \n')
@@ -52,12 +67,4 @@ print(f'y_down = {y_down}\n\n')
 print(f'epaisseur max : {epaisseur_max}\n')
 print(f'position epaisseur max {pos_epaisseur_max}')
 
-plt.plot(x_up , y_up , label='Extrados')
-plt.plot(x_down , y_down , label='Intrados')
-plt.xlabel('C [m]')
-plt.ylabel('y [m]')
-plt.title(f'Profil NACA 00{xx}')
-plt.grid(True)
-plt.legend()
-plt.axis('equal')
-plt.show()
+graphique(x_up , y_up , x_down , y_down)
